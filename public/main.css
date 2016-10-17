@@ -1,5 +1,11 @@
+h1 {
+  color: white;
+}
+
 #banner {
-  background-color: turquoise;
-  border: 5px;
-  border-color: grey;
+    background-color: turquoise;
+    border: 1px;
+    border-style: outset;
+    border-color: darkgrey;
+    padding: 0px 20px;
 }
