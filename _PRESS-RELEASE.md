@@ -32,7 +32,7 @@ Once the project moves into development, the press release can be used as a touc
   > To get started, just enter your zipcode, and select the custom options for your visualization.
 
 ## Testimonial ##
-  > The weather has never been more fun.
+  > The weather has never looked better.
 
 ## Stay Tuned! ##
   > Visual Weather is currently in development, come back soon to try it out.
