@@ -13,6 +13,7 @@
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "consolidate": "^0.14.1",
+    "dark-sky": "^1.0.9",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-partials": "^0.3.0",
