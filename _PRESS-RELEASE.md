@@ -1,4 +1,4 @@
-# Project Name #
+# Visual Weather #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,7 +17,7 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Weather Visualizer.
+  > Visual Weather.
 
 ## Sub-Heading ##
   > Create a data driven view of the weather forecast in your area.
@@ -25,17 +25,17 @@ Once the project moves into development, the press release can be used as a touc
 ## Summary ##
   > This visualizer will allow you to see the weather forecast based on what is most important to you. You can look at temperature, rain-fall, humidity, and wind conditions. You can create a visualization of the coming week's forecast, or look back and weather trends from the past. You can also save your favorite visualizations to look at later.
 
-## Benefit ##
+## Why use Visual Weather? ##
   > This product puts the weather at your fingertips. Check out trends from the past, or look ahead to see what's coming.
 
-## Quote from You ##
-  > Weather Visualizer is a fun and interactive way to look at the weather.
+## Message from the CEO ##
+  > Visual Weather is a fun and interactive way to look at the weather.
 
 ## How to Get Started ##
   > To get started, just enter your zipcode, and select the custom options for your visualization.
 
-## Customer Quote ##
+## Testimonial ##
   > The weather has never been more fun.
 
-## Closing and Call to Action ##
-  > Get started viewing the weather in a whole new way now!
+## Stay Tuned! ##
+  > Visual Weather is currently in development, come back soon to try it out.
