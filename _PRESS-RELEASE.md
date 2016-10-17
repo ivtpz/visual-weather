@@ -16,11 +16,8 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Visual Weather.
 
-## Sub-Heading ##
-  > Create a data driven view of the weather forecast in your area.
+## Create a data driven view of the weather forecast in your area. ##
 
 ## Summary ##
   > This visualizer will allow you to see the weather forecast based on what is most important to you. You can look at temperature, rain-fall, humidity, and wind conditions. You can create a visualization of the coming week's forecast, or look back and weather trends from the past. You can also save your favorite visualizations to look at later.
