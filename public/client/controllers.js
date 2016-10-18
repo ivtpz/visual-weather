@@ -3,9 +3,9 @@ angular.module('weather.view', [])
 
 .controller('weatherCtrl', function($scope, GetWeather, SaveWeather, $rootScope) {
   $scope.data = {};
-  $scope.dataView = 'temp';
   $scope.active = false;
-  $scope.fetch = function(type) {
+  $scope.fetch = function(type, view) {
+    $scope.data.type = view;
     if (type === 'forecast') {
       var url = `/forecast?zip=${$scope.zipcode}`
     } else if (type === 'history') {
@@ -26,14 +26,11 @@ angular.module('weather.view', [])
     });
   };
 
-  $scope.setData = function(dataView) {
-    $scope.dataView = dataView;
-  };
   $scope.setWeatherArray = function(array) {
     $scope.tableData = array;
   }
   $scope.saveVisual = function() {
-    SaveWeather.dbInsert($scope.name, $scope.dataView, $scope.tableData)
+    SaveWeather.dbInsert($scope.name, $scope.data.type, $scope.tableData)
     $scope.name = '';
   };
 })

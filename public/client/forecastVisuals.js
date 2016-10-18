@@ -13,7 +13,7 @@ angular.module('weather.visual', ['weather.view'])
       //watching for new data, create visualization with new data
       scope.$root.$on('create', (event, data) => {
         console.log('data ', data)
-        let type = data.type || scope.dataView;
+        let type = data.type || scope.data.type;
         console.log('type set to ',type)
         //let data = scope.data;
         if (data.weather) {
