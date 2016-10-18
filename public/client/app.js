@@ -5,22 +5,42 @@ angular.module('weather', [])
 
 .controller('weatherCtrl', function($scope, GetWeather) {
   $scope.data = {};
+  $scope.view = 'forecast';
   $scope.fetch = function() {
-    GetWeather.fetch($scope.zipcode)
+    if ($scope.view === 'forecast') {
+      var url = `/forecast?zip=${$scope.zipcode}`
+    } else if ($scope.view === 'history') {
+      $scope.startTime = $scope.startTime.slice(-4) + '-' + $scope.startTime.slice(0,5)
+      var url = `/history?zip=${$scope.zipcode}&time=${$scope.startTime}`
+    }
+    $scope.zipcode = '';
+    $scope.startTime = '';
+    GetWeather.fetch(url)
     .then(data => {
-      $scope.data.weather = data;
+      if ($scope.view === 'forecast') {
+        $scope.data.weather = data.hourly.data;
+        console.log($scope.data.weather)
+      } else if ($scope.view === 'history') {
+        console.log(data)
+        $scope.data.weather = data;
+      }
     });
   };
+  $scope.switchView = function(view) {
+    $scope.view = view;
+    $scope.startTime = '';
+    $scope.zipcode = '';
+  }
 })
 
 .factory('GetWeather', function($http) {
-  let fetch = function (zip) {
-    console.log('about to make get request with ', zip)
+  let fetch = function (url) {
+    console.log('about to make get request with ', url)
     return $http({
       method: 'GET',
-      url: `/forecast?zip=${zip}`
+      url: url
     }).then(data => {
-      return data.data.hourly.data;
+      return data.data;
     })
   }
   return {

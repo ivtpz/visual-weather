@@ -16,8 +16,10 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'))
 
 //handle routes
-app.get('/', (req, res) => res.render('index.html'))
+app.get('/', (req, res) => res.render('index.html'));
 
-app.get('/forecast', fetch.request)
+app.get('/forecast', fetch.request);
+
+app.get('/history', fetch.histRequest);
 
 app.listen(3030);
