@@ -4,6 +4,7 @@ angular.module('weather.view', [])
 .controller('weatherCtrl', function($scope, GetWeather, SaveWeather, $rootScope) {
   $scope.data = {};
   $scope.active = false;
+
   $scope.fetch = function(type, view) {
     $scope.data.type = view;
     if (type === 'forecast') {
@@ -28,7 +29,8 @@ angular.module('weather.view', [])
 
   $scope.setWeatherArray = function(array) {
     $scope.tableData = array;
-  }
+  };
+
   $scope.saveVisual = function() {
     SaveWeather.dbInsert($scope.name, $scope.data.type, $scope.tableData)
     $scope.name = '';
@@ -37,7 +39,6 @@ angular.module('weather.view', [])
 
 .controller('savedView', function($scope, SaveWeather, $rootScope) {
   $scope.load = function() {
-    console.log('loading started')
     SaveWeather.getAll()
     .then(data => {
       console.log(data)
@@ -46,7 +47,6 @@ angular.module('weather.view', [])
   };
   $scope.load();
   $scope.makeView = function(view) {
-    console.log('should broadcast ')
     $rootScope.$broadcast('create', view);
   }
-})
+});

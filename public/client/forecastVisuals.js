@@ -82,9 +82,10 @@ angular.module('weather.visual', ['weather.view'])
         console.log('should create')
           //display data above visualization
           var tooltip = d3.select("#dataDisplay")
-            .append("div")
-            .style("padding-left", 15 + 'px')
-            .style("font-size", 20 + 'px')
+
+          tooltip.selectAll('div').remove();
+
+          tooltip.append("div")
             .style("visibility", "hidden");
 
           let visual = d3.select(element[0]);

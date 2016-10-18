@@ -5,8 +5,8 @@
     </ul>
 
     <form name="weatherForm" novalidate>
-      <label>Zip Code:</label>
-      <input name='zip' type="text" pattern="[0-9]{5}" ng-model='zipcode' required>
+      <label>Location:</label>
+      <input name='zip' type="text" ng-model='zipcode' required>
       <label>Starting at:</label>
       <input name='from' type='year' ng-model='startTime' pattern="\d{2}-\d{2}-\d{4}" placeholder="mm-dd-yyyy" ng-required='view==="history"'>
       <label>View:</label>

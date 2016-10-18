@@ -26,6 +26,11 @@ footer {
     color: white;
 }
 
+#dataDisplay {
+  padding-left: 15px;
+  font-size: 20px;
+}
+
 path {
   fill: none;
   stroke-linejoin: round;

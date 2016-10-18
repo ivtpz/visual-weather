@@ -5,8 +5,8 @@
     </ul>
 
     <form name="weatherForm"  novalidate>
-      <label>Zip Code:</label>
-      <input name='zip' type="text" pattern="[0-9]{5}" ng-model='zipcode' required>
+      <label>Location:</label>
+      <input name='zip' type="text" ng-model='zipcode' required>
       <label>View:</label>
       <button ng-show='weatherForm.$valid' ng-click='fetch("forecast", "temp")'>Temperature</button>
       <button ng-show='weatherForm.$valid' ng-click='fetch("forecast", "wind")'>Wind Speed</button>
