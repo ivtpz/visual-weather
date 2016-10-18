@@ -47,6 +47,7 @@ angular.module('weather.services', [])
   }
 })
 
+
 .factory('ColorRange', function() {
   //setting color map
   let pick = function(temp) {

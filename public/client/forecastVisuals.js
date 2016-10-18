@@ -4,15 +4,18 @@ const dayMap = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(
 angular.module('weather.visual', ['weather.view'])
 
 
-.directive('d3Forecast', function(ColorRange, CreateView) {
+.directive('d3Forecast',function(ColorRange, $rootScope) {
 
   return {
     restrict: 'E',
     controller: 'weatherCtrl',
     link: function (scope, element, attrs, controller) {
       //watching for new data, create visualization with new data
-      scope.$watch('update', function(val) {
-        let data = scope.data;
+      scope.$root.$on('create', (event, data) => {
+        console.log('data ', data)
+        let type = data.type || scope.dataView;
+        console.log('type set to ',type)
+        //let data = scope.data;
         if (data.weather) {
           //get data for history requests
           if (data.weather.length < 26) {
@@ -20,13 +23,13 @@ angular.module('weather.visual', ['weather.view'])
             data.weather.forEach(hour => {
               let time = new Date(hour.time*1000).getHours();
               let day = new Date(hour.time*1000).getDay();
-              if (scope.dataView === 'temp') {
+              if (type === 'temp') {
                 tableData[0].push({
                   temp: hour.apparentTemperature,
                   day: dayMap[day],
                   hour: time
                 })
-              } else if (scope.dataView === 'wind' && time % 3 === 0) {
+              } else if (type === 'wind' && time % 3 === 0) {
                 tableData[0].push({
                   wind: hour.windSpeed,
                   day: dayMap[day],
@@ -48,13 +51,13 @@ angular.module('weather.visual', ['weather.view'])
               if (!skip) {
                 let day = new Date(hour.time*1000).getDay();
                 var info;
-                if (scope.dataView === 'temp') {
+                if (type === 'temp') {
                   info = {
                     temp: hour.apparentTemperature,
                     day: dayMap[day],
                     hour: new Date(hour.time*1000).getHours()
                   };
-                } else if (scope.dataView === 'wind' && time % 4 === 0) {
+                } else if (type === 'wind' && time % 4 === 0) {
                   info = {
                     wind: hour.windSpeed,
                     day: dayMap[day],
@@ -73,6 +76,10 @@ angular.module('weather.visual', ['weather.view'])
             tableData = tableData.slice(start).concat(tableData.slice(0, start));
             scope.setWeatherArray(tableData);
           }
+        } else {
+          var tableData = data.weatherData;
+        }
+        console.log('should create')
           //display data above visualization
           var tooltip = d3.select("#dataDisplay")
             .append("div")
@@ -84,7 +91,7 @@ angular.module('weather.visual', ['weather.view'])
           //make sure display is clear
           visual.selectAll('*').remove();
           //create a new visualizing space
-          if (scope.dataView === 'temp') {
+          if (type === 'temp') {
             visual.append('table')
               .attr('width', 800)
               .attr('height', tableData.length * 40)
@@ -102,7 +109,7 @@ angular.module('weather.visual', ['weather.view'])
                   .text(`Temperature: ${parseInt(d.temp)} ° on ${d.day} at ${d.hour}:00`)
               })
               .on("mouseout", () => {return tooltip.style("visibility", "hidden");});
-            } else if (scope.dataView === 'wind') {
+            } else if (type === 'wind') {
               visual.append('table')
                 .selectAll('tr')
                 .data(tableData)
@@ -174,7 +181,6 @@ angular.module('weather.visual', ['weather.view'])
                   });
                 })
             }
-        }
       }, true)
     }
   }

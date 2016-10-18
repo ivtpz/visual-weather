@@ -3,6 +3,9 @@
   <li ><a data-toggle="tab" ng-click="switchView('history')" href="#/history">History</a></li>
   <li class="active"><a data-toggle="tab" ng-click="switchView('saved')">Saved Views</a></li>
 </ul>
-<div ng-repeat="view in data" ng-click="">{{ view.name }}</div>
-<d3Forecast></d3Forecast>
+<div ng-repeat="view in data" >
+  <span ng-click="makeView(view)">{{ view.name }}</span>
+</div>
+<div id="dataDisplay" class="row"></div>
+<d3-forecast></d3-forecast>
 

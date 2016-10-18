@@ -1,9 +1,8 @@
 "use strict";
 angular.module('weather.view', [])
 
-.controller('weatherCtrl', function($scope, GetWeather, SaveWeather) {
+.controller('weatherCtrl', function($scope, GetWeather, SaveWeather, $rootScope) {
   $scope.data = {};
-  $scope.update = false;
   $scope.view = 'forecast';
   $scope.dataView = 'temp';
   $scope.active = false;
@@ -23,7 +22,7 @@ angular.module('weather.view', [])
       } else if ($scope.view === 'history') {
         $scope.data.weather = data.hourly.data;
       }
-      $scope.update = !$scope.update;
+      $rootScope.$broadcast('create', $scope.data)
       $scope.active = true;
     });
   };
@@ -44,7 +43,7 @@ angular.module('weather.view', [])
   };
 })
 
-.controller('savedView', function($scope, SaveWeather) {
+.controller('savedView', function($scope, SaveWeather, $rootScope) {
   $scope.load = function() {
     console.log('loading started')
     SaveWeather.getAll()
@@ -54,4 +53,8 @@ angular.module('weather.view', [])
     })
   };
   $scope.load();
+  $scope.makeView = function(view) {
+    console.log('should broadcast ')
+    $rootScope.$broadcast('create', view);
+  }
 })
