@@ -132,18 +132,19 @@ angular.module('weather', [])
           if (data.weather.length < 26) {
             var tableData = [[]];
             data.weather.forEach(hour => {
+              let time = new Date(hour.time*1000).getHours();
               let day = new Date(hour.time*1000).getDay();
               if (scope.dataView === 'temp') {
                 tableData[0].push({
                   temp: hour.apparentTemperature,
                   day: dayMap[day],
-                  hour: new Date(hour.time*1000).getHours()
+                  hour: time
                 })
-              } else if (scope.dataView === 'wind') {
+              } else if (scope.dataView === 'wind' && time % 3 === 0) {
                 tableData[0].push({
                   wind: hour.windSpeed,
                   day: dayMap[day],
-                  hour: new Date(hour.time*1000).getHours()
+                  hour: time
                 })
               }
             })
@@ -167,7 +168,7 @@ angular.module('weather', [])
                     day: dayMap[day],
                     hour: new Date(hour.time*1000).getHours()
                   };
-                } else if (scope.dataView === 'wind' && time % 2 === 0) {
+                } else if (scope.dataView === 'wind' && time % 3 === 0) {
                   info = {
                     wind: hour.windSpeed,
                     day: dayMap[day],
@@ -224,7 +225,7 @@ angular.module('weather', [])
                 .data(d => d)
                 .enter()
                 .append('td')
-                .style('background-color', 'black')
+                //.style('background-color', 'black')
                 .on('mouseover', (d) => {
                 return tooltip.style("visibility", "visible")
                   .text(`${d.wind} mph on ${d.day} at ${d.hour}:00`)
@@ -232,14 +233,14 @@ angular.module('weather', [])
                 .on("mouseout", () => {return tooltip.style("visibility", "hidden");})
                 .each(function (d, i) {
                   console.log(d)
-                  var width = 60,
-                  height = 60,
+                  var width = 90,
+                  height = 90,
                   rotate = [10, -10],
                   velocity = [.003*d.wind, -.0015*d.wind],
                   time = Date.now();
 
                   var projection = d3.geoOrthographic()
-                  .scale(30)
+                  .scale(44)
                   .translate([width / 2, height / 2])
                   .clipAngle(90 + 1e-6)
                   .precision(.3);
