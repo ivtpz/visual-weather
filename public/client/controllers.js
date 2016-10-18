@@ -40,7 +40,7 @@ angular.module('weather.view', [])
   }
   $scope.saveVisual = function() {
     console.log('ready to save ', $scope.tableData)
-    SaveWeather.dbInsert($scope.name, $scope.tableData)
+    SaveWeather.dbInsert($scope.name, $scope.dataView, $scope.tableData)
   };
 })
 
@@ -50,7 +50,7 @@ angular.module('weather.view', [])
     SaveWeather.getAll()
     .then(data => {
       console.log(data)
-      $scope.data = data;
+      $scope.data = data.data;
     })
   };
   $scope.load();

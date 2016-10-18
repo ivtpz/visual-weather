@@ -4,7 +4,7 @@ const dayMap = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(
 angular.module('weather.visual', ['weather.view'])
 
 
-.directive('d3Forecast', function(ColorRange) {
+.directive('d3Forecast', function(ColorRange, CreateView) {
 
   return {
     restrict: 'E',

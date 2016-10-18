@@ -1,6 +1,8 @@
-    <ul class="nav nav-tabs">
-      <li ><a data-toggle="tab" ng-click="switchView('forecast')" href="#/generate">Forecast</a></li>
-      <li ><a data-toggle="tab" ng-click="switchView('history')" href="#/history">History</a></li>
-      <li class="active"><a data-toggle="tab" ng-click="switchView('saved')">Saved Views</a></li>
-    </ul>
+<ul class="nav nav-tabs">
+  <li ><a data-toggle="tab" ng-click="switchView('forecast')" href="#/generate">Forecast</a></li>
+  <li ><a data-toggle="tab" ng-click="switchView('history')" href="#/history">History</a></li>
+  <li class="active"><a data-toggle="tab" ng-click="switchView('saved')">Saved Views</a></li>
+</ul>
+<div ng-repeat="view in data" ng-click="">{{ view.name }}</div>
+<d3Forecast></d3Forecast>
 

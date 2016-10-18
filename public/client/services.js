@@ -17,9 +17,10 @@ angular.module('weather.services', [])
 })
 
 .factory('SaveWeather', function($http) {
-  let dbInsert = function(name, data) {
+  let dbInsert = function(name, type, data) {
     var insert = {
       name: name,
+      type: type,
       weatherData: data
     }
     return $http({
