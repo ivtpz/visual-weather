@@ -36,6 +36,7 @@ angular.module('weather.visual', ['weather.view'])
                   hour: time
                 })
               }
+            scope.setWeatherArray(tableData);
             })
           } else {
             //get just the temp or wind speed and time data
