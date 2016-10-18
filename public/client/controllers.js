@@ -43,3 +43,15 @@ angular.module('weather.view', [])
     SaveWeather.dbInsert($scope.name, $scope.tableData)
   };
 })
+
+.controller('savedView', function($scope, SaveWeather) {
+  $scope.load = function() {
+    console.log('loading started')
+    SaveWeather.getAll()
+    .then(data => {
+      console.log(data)
+      $scope.data = data;
+    })
+  };
+  $scope.load();
+})

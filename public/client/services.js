@@ -31,8 +31,17 @@ angular.module('weather.services', [])
     }, err => {
       alert(err.data)
     })
+  };
+  let getAll = function () {
+    return $http({
+      method: 'GET',
+      url: '/save'
+    }).then(res => {
+      return res;
+    })
   }
   return {
+    getAll: getAll,
     dbInsert: dbInsert
   }
 })
