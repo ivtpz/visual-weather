@@ -3,7 +3,6 @@ const dayMap = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(
 
 angular.module('weather.visual', ['weather.view'])
 
-
 .directive('d3Forecast',function(ColorRange, $rootScope) {
 
   return {
@@ -12,10 +11,8 @@ angular.module('weather.visual', ['weather.view'])
     link: function (scope, element, attrs, controller) {
       //watching for new data, create visualization with new data
       scope.$root.$on('create', (event, data) => {
-        console.log('data ', data)
         let type = data.type || scope.data.type;
-        console.log('type set to ',type)
-        //let data = scope.data;
+        //handle new data
         if (data.weather) {
           //get data for history requests
           if (data.weather.length < 26) {
@@ -45,6 +42,7 @@ angular.module('weather.visual', ['weather.view'])
             var start = 0;
             data.weather.forEach(hour => {
               let time = new Date(hour.time*1000).getHours();
+              //start at 00:00 on the next day
               if (skip && time === 0) {
                 skip = false;
                 start = new Date(hour.time*1000).getDay();
@@ -78,6 +76,7 @@ angular.module('weather.visual', ['weather.view'])
             scope.setWeatherArray(tableData);
           }
         } else {
+        //already saved data
           var tableData = data.weatherData;
         }
         console.log('should create')
