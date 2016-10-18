@@ -21,14 +21,16 @@
     <li ng-class="{'active': view==='forecast'}"><a data-toggle="tab" ng-click="switchView('forecast')">Forecast</a></li>
     <li ng-class="{'active': view==='history'}"><a data-toggle="tab" ng-click="switchView('history')">History</a></li>
   </ul>
-  <form name="weatherForm" ng-submit="fetch()" novalidate>
+  <form name="weatherForm" ng-submit='fetch()' novalidate>
     <label>Zip Code:</label>
     <input name='zip' type="text" pattern="[0-9]{5}" ng-model='zipcode' required>
+    <label>View:</label>
     <span ng-show='view === "history"'>
     <label>Starting at:</label>
     <input name='from' type='year' ng-model='startTime' pattern="\d{2}-\d{2}-\d{4}" placeholder="mm-dd-yyyy" ng-required='view==="history"'>
     </span>
-    <button ng-show='weatherForm.$valid' type="submit">Submit</button>
+    <button ng-show='weatherForm.$valid' ng-click='setData("temp")'>Temperature</button>
+    <button ng-show='weatherForm.$valid' ng-click='setData("wind")'>Wind Speed</button>
   </form>
   <div id="dataDisplay" class="row"></div>
   <d3-forecast></d3-forecast>
