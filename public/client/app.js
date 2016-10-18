@@ -19,10 +19,8 @@ angular.module('weather', [])
     .then(data => {
       if ($scope.view === 'forecast') {
         $scope.data.weather = data.hourly.data;
-        console.log($scope.data.weather)
       } else if ($scope.view === 'history') {
-        console.log(data)
-        $scope.data.weather = data;
+        $scope.data.weather = data.hourly.data;
       }
     });
   };
@@ -61,16 +59,16 @@ angular.module('weather', [])
         red: 25, green: 220, blue: 120
       },
       med: { //55
-        red: 240, green: 120, blue: 20
+        red: 220, green: 200, blue: 30
       },
       mhot: { //70
-        red: 200, green: 240, blue: 20
+        red: 230, green: 160, blue: 20
       },
       hot: { //85
-        red: 240, green: 110, blue: 20
+        red: 240, green: 60, blue: 20
       },
       xhot: { //100
-        red: 180, green: 0, blue: 40
+        red: 200, green: 0, blue: 40
       }
     };
     if (temp < 10) {
@@ -132,32 +130,44 @@ angular.module('weather', [])
           let visual = d3.select(element[0]);
           //make sure display is clear
           visual.selectAll('*').remove();
-          //get just the temp and time data
-          let tableData = new Array(7);
-          var skip = true;
-          var start = 0;
-          data.weather.forEach(hour => {
-            let time = new Date(hour.time*1000).getHours();
-            if (skip && time === 0) {
-              skip = false;
-              start = new Date(hour.time*1000).getDay();
-            }
-            if (!skip) {
+          //get data for history requests
+          if (data.weather.length < 26) {
+            var tableData = [[]];
+            data.weather.forEach(hour => {
               let day = new Date(hour.time*1000).getDay();
-              let info = {
+              tableData[0].push({
                 temp: hour.apparentTemperature,
                 day: dayMap[day],
-                hour: time
-              };
-              if (!tableData[day]) {
-                tableData[day] = [info];
-              } else {
-                tableData[day].push(info);
+                hour: new Date(hour.time*1000).getHours()
+              })
+            })
+          } else {
+            //get just the temp and time data
+            var tableData = new Array(7);
+            var skip = true;
+            var start = 0;
+            data.weather.forEach(hour => {
+              let time = new Date(hour.time*1000).getHours();
+              if (skip && time === 0) {
+                skip = false;
+                start = new Date(hour.time*1000).getDay();
               }
-            }
-          });
+              if (!skip) {
+                let day = new Date(hour.time*1000).getDay();
+                let info = {
+                  temp: hour.apparentTemperature,
+                  day: dayMap[day],
+                  hour: time
+                };
+                if (!tableData[day]) {
+                  tableData[day] = [info];
+                } else {
+                  tableData[day].push(info);
+                }
+              }
+            });
+          }
           tableData = tableData.slice(start).concat(tableData.slice(0, start));
-          console.log(tableData);
           //create a new visualizing space
           visual.append('table')
             .attr('width', 650)
