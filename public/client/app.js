@@ -20,7 +20,6 @@ angular.module('weather', [])
     .then(data => {
       if ($scope.view === 'forecast') {
         $scope.data.weather = data.hourly.data;
-        console.log(data)
       } else if ($scope.view === 'history') {
         $scope.data.weather = data.hourly.data;
       }
@@ -126,7 +125,6 @@ angular.module('weather', [])
     link: function (scope, element, attrs) {
       //watching for new data, create visualization with new data
       scope.$watch('data', function(data) {
-      console.log(scope.dataView)
         if (data.weather) {
           //get data for history requests
           if (data.weather.length < 26) {
@@ -168,7 +166,7 @@ angular.module('weather', [])
                     day: dayMap[day],
                     hour: new Date(hour.time*1000).getHours()
                   };
-                } else if (scope.dataView === 'wind' && time % 3 === 0) {
+                } else if (scope.dataView === 'wind' && time % 4 === 0) {
                   info = {
                     wind: hour.windSpeed,
                     day: dayMap[day],
@@ -190,6 +188,7 @@ angular.module('weather', [])
           var tooltip = d3.select("#dataDisplay")
             .append("div")
             .style("padding-left", 15 + 'px')
+            .style("font-size", 20 + 'px')
             .style("visibility", "hidden");
 
           let visual = d3.select(element[0]);
@@ -211,11 +210,10 @@ angular.module('weather', [])
               .style('background-color', (d) => ColorRange.pick(d.temp))
               .on('mouseover', (d) => {
                 return tooltip.style("visibility", "visible")
-                  .text(`${parseInt(d.temp)} ° on ${d.day} at ${d.hour}:00`)
+                  .text(`Temperature: ${parseInt(d.temp)} ° on ${d.day} at ${d.hour}:00`)
               })
               .on("mouseout", () => {return tooltip.style("visibility", "hidden");});
             } else if (scope.dataView === 'wind') {
-              console.log(tableData)
               visual.append('table')
                 .selectAll('tr')
                 .data(tableData)
@@ -228,11 +226,10 @@ angular.module('weather', [])
                 //.style('background-color', 'black')
                 .on('mouseover', (d) => {
                 return tooltip.style("visibility", "visible")
-                  .text(`${d.wind} mph on ${d.day} at ${d.hour}:00`)
+                  .text(`Wind Speed: ${d.wind} mph on ${d.day} at ${d.hour}:00`)
                 })
                 .on("mouseout", () => {return tooltip.style("visibility", "hidden");})
                 .each(function (d, i) {
-                  console.log(d)
                   var width = 90,
                   height = 90,
                   rotate = [10, -10],
@@ -266,6 +263,16 @@ angular.module('weather', [])
                   svg.append("path")
                       .datum(graticule)
                       .attr("class", "graticule")
+                      .attr("d", path);
+                //adding an equator
+                  svg.append("path")
+                      .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
+                      .attr("class", "equator")
+                      .attr("d", path);
+                //adding an prime meridian
+                  svg.append("path")
+                      .datum({type: "LineString", coordinates: [[0, -180], [0, -90], [0, 0], [0, 90], [0, 180]]})
+                      .attr("class", "equator")
                       .attr("d", path);
 
 

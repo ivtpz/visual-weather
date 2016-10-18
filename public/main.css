@@ -13,6 +13,7 @@ footer {
 .container {
   background-color: #f4f4f4;
   min-height: 200px;
+  padding-bottom: 20px;
 }
 
 #banner {
@@ -35,3 +36,7 @@ path {
   stroke: blue;
 }
 
+.equator {
+  stroke: red;
+  stroke-width: 2px;
+}

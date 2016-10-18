@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+//Set the port
+const port = process.env.PORT || 3030;
+
 //Set view engine
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -22,4 +25,4 @@ app.get('/forecast', fetch.request);
 
 app.get('/history', fetch.histRequest);
 
-app.listen(3030);
+app.listen(port);
