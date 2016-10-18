@@ -17,11 +17,12 @@
 </div>
 <body ng-app='weather'>
   <div class='container' ng-controller='weatherCtrl'>
-  <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs">
       <li ng-class="{'active': view==='forecast'}"><a data-toggle="tab" ng-click="switchView('forecast')">Forecast</a></li>
       <li ng-class="{'active': view==='history'}"><a data-toggle="tab" ng-click="switchView('history')">History</a></li>
+      <li ng-class="{'active': view==='saved'}"><a data-toggle="tab" ng-click="switchView('saved')">Saved Views</a></li>
     </ul>
-    <form name="weatherForm" ng-submit='fetch()' novalidate>
+    <form name="weatherForm" ng-submit='fetch()' ng-hide='view==="saved"' novalidate>
       <label>Zip Code:</label>
       <input name='zip' type="text" pattern="[0-9]{5}" ng-model='zipcode' required>
       <label>View:</label>
@@ -34,6 +35,11 @@
     </form>
     <div id="dataDisplay" class="row"></div>
     <d3-forecast></d3-forecast>
+    <form name="save" ng-show='active' ng-submit='saveVisual()' novalidate>
+      <label>Name:</label>
+      <input type="text" name="name" ng-model="name">
+      <button>Save View</button>
+    </form>
   </div>
   <script src='/client/app.js'></script>
   <script src='/client/controllers.js'></script>

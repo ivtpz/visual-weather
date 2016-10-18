@@ -1,14 +1,15 @@
 "use strict";
 const dayMap = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(',');
 
-angular.module('weather.visual', [])
+angular.module('weather.visual', ['weather.view'])
 
 
 .directive('d3Forecast', function(ColorRange) {
 
   return {
     restrict: 'E',
-    link: function (scope, element, attrs) {
+    controller: 'weatherCtrl',
+    link: function (scope, element, attrs, controller) {
       //watching for new data, create visualization with new data
       scope.$watch('update', function(val) {
         let data = scope.data;
@@ -70,6 +71,7 @@ angular.module('weather.visual', [])
               }
             });
             tableData = tableData.slice(start).concat(tableData.slice(0, start));
+            scope.setWeatherArray(tableData);
           }
           //display data above visualization
           var tooltip = d3.select("#dataDisplay")

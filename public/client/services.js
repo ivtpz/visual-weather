@@ -16,6 +16,27 @@ angular.module('weather.services', [])
   }
 })
 
+.factory('SaveWeather', function($http) {
+  let dbInsert = function(name, data) {
+    var insert = {
+      name: name,
+      weatherData: data
+    }
+    return $http({
+      method: 'POST',
+      url: '/save',
+      data: insert
+    }).then(res => {
+      return res;
+    }, err => {
+      alert(err.data)
+    })
+  }
+  return {
+    dbInsert: dbInsert
+  }
+})
+
 .factory('ColorRange', function() {
   //setting color map
   let pick = function(temp) {

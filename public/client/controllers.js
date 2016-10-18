@@ -1,11 +1,12 @@
 "use strict";
 angular.module('weather.view', [])
 
-.controller('weatherCtrl', function($scope, GetWeather) {
+.controller('weatherCtrl', function($scope, GetWeather, SaveWeather) {
   $scope.data = {};
   $scope.update = false;
   $scope.view = 'forecast';
   $scope.dataView = 'temp';
+  $scope.active = false;
   $scope.fetch = function() {
     if ($scope.view === 'forecast') {
       var url = `/forecast?zip=${$scope.zipcode}`
@@ -23,6 +24,7 @@ angular.module('weather.view', [])
         $scope.data.weather = data.hourly.data;
       }
       $scope.update = !$scope.update;
+      $scope.active = true;
     });
   };
   $scope.switchView = function(view) {
@@ -32,5 +34,12 @@ angular.module('weather.view', [])
   };
   $scope.setData = function(dataView) {
     $scope.dataView = dataView;
+  };
+  $scope.setWeatherArray = function(array) {
+    $scope.tableData = array;
   }
+  $scope.saveVisual = function() {
+    console.log('ready to save ', $scope.tableData)
+    SaveWeather.dbInsert($scope.name, $scope.tableData)
+  };
 })
