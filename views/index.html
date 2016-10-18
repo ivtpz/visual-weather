@@ -22,9 +22,12 @@
     <input name='zip' type="text" pattern="[0-9]{5}" ng-model='zipcode' required>
     <button ng-show='weatherForm.$valid' type="submit">Submit</button>
   </form>
+  <div id="dataDisplay" class="row"></div>
   <d3-forecast></d3-forecast>
 </div>
-<a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+ <footer>
+    <a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+ </footer>
   <script src='/client/app.js'></script>
 <!--   <script src='/client/forecastVisuals.js'></script>
  --></body>
