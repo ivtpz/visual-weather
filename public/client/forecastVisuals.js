@@ -24,17 +24,17 @@ angular.module('weather.visual', ['weather.view'])
               let time = new Date(hour.time*1000).getHours();
               let day = new Date(hour.time*1000).getDay();
               if (type === 'temp') {
-                tableData[0].push({
+                tableData[0][time] = {
                   temp: hour.apparentTemperature,
                   day: dayMap[day],
                   hour: time
-                })
+                };
               } else if (type === 'wind' && time % 3 === 0) {
-                tableData[0].push({
+                tableData[0][time / 3] ={
                   wind: hour.windSpeed,
                   day: dayMap[day],
                   hour: time
-                })
+                };
               }
             scope.setWeatherArray(tableData);
             })
