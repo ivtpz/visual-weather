@@ -1,3 +1,4 @@
+"use strict";
 const express = require('express');
 const engines = require('consolidate');
 const fetch = require('./lib/fetchForecast.js')
