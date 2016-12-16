@@ -1,7 +1,7 @@
 "use strict";
 angular.module('weather.view', [])
 
-.controller('weatherCtrl', function($scope, GetWeather, SaveWeather, $rootScope) {
+.controller('weatherCtrl', function($scope, DataService, $rootScope) {
   $scope.data = {};
   $scope.active = false;
 
@@ -15,13 +15,9 @@ angular.module('weather.view', [])
     }
     $scope.zipcode = '';
     $scope.startTime = '';
-    GetWeather.fetch(url)
+    DataService.fetch(url)
     .then(data => {
-      if (type === 'forecast') {
-        $scope.data.weather = data.hourly.data;
-      } else if (type === 'history') {
-        $scope.data.weather = data.hourly.data;
-      }
+      $scope.data.weather = data.hourly.data;
       $rootScope.$broadcast('create', $scope.data)
       $scope.active = true;
     });
@@ -32,14 +28,14 @@ angular.module('weather.view', [])
   };
 
   $scope.saveVisual = function() {
-    SaveWeather.dbInsert($scope.name, $scope.data.type, $scope.tableData)
+    DataService.save($scope.name, $scope.data.type, $scope.tableData)
     $scope.name = '';
   };
 })
 
-.controller('savedView', function($scope, SaveWeather, $rootScope) {
+.controller('savedView', function($scope, DataService, $rootScope) {
   $scope.load = function() {
-    SaveWeather.getAll()
+    DataService.getAll()
     .then(data => {
       console.log(data)
       $scope.data = data.data;
