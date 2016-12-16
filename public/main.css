@@ -17,13 +17,13 @@ footer {
 }
 
 #banner {
-    background: url('/assets/weather.jpg') no-repeat center center;
-    background-size: cover;
-    border: 1px;
-    border-style: outset;
-    border-color: darkgrey;
-    padding: 0px 20px;
-    color: white;
+  background: url('/assets/weather.jpg') no-repeat center center;
+  background-size: cover;
+  border: 1px;
+  border-style: outset;
+  border-color: darkgrey;
+  padding: 0px 20px;
+  color: white;
 }
 
 #dataDisplay {
