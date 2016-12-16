@@ -2,23 +2,18 @@
 angular.module('weather.services', [])
 
 
-.factory('GetWeather', function($http) {
-  let fetch = function (url) {
-    console.log('about to make get request with ', url)
+.factory('DataService', function($http) {
+
+  const fetch = function (url) {
     return $http({
       method: 'GET',
       url: url
     }).then(data => {
       return data.data;
-    })
-  }
-  return {
-    fetch: fetch
-  }
-})
+    });
+  };
 
-.factory('SaveWeather', function($http) {
-  let dbInsert = function(name, type, data) {
+  const save = function(name, type, data) {
     var insert = {
       name: name,
       type: type,
@@ -31,22 +26,26 @@ angular.module('weather.services', [])
     }).then(res => {
       return res;
     }, err => {
-      alert(err.data)
+      alert(err.data);
     })
   };
-  let getAll = function () {
+
+  const getAll = function () {
     return $http({
       method: 'GET',
       url: '/save'
     }).then(res => {
       return res;
-    })
-  }
+    });
+  };
+
   return {
+    fetch: fetch,
     getAll: getAll,
-    dbInsert: dbInsert
-  }
-})
+    save: save
+  };
+});
+
 
 
 .factory('ColorRange', function() {
